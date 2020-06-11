@@ -13,10 +13,10 @@ export default function Greeting() {
   }
 
   return showGreeting ? (
-    <div>Welcome, {username}!</div>
+    <div>Hello, there, {username}!</div>
   ) : (
     <div>
-      <label for="username">Name</label>
+      <label htmlFor="username">Name</label>
       <input id="username" maxLength="20" onChange={updateUsername} />
 
       <button type="submit" onClick={submitHandler}>
