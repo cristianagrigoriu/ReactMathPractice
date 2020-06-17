@@ -4,7 +4,7 @@ import Greeting from "./Greeting";
 import Settings from "./Settings";
 
 export default function App() {
-  const [showSettings, setShowSettings] = useState("false");
+  const [showSettings, setShowSettings] = useState(false);
 
   function handleShowSettings() {
     setShowSettings(true);
