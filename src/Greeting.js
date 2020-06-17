@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-export default function Greeting() {
+export default function Greeting(props) {
   const [username, setUsername] = useState("");
   const [showGreeting, setShowGreeting] = useState(false);
 
   function submitHandler() {
     setShowGreeting(true);
+    props.submitHandler();
   }
 
   function updateUsername(event) {
