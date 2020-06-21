@@ -4,12 +4,22 @@ export default function Greeting({ submitHandler }) {
   const [username, setUsername] = useState("");
   const [showGreeting, setShowGreeting] = useState(false);
 
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+
   function submitNameHandler() {
-    setShowGreeting(true);
-    submitHandler();
+    if (isOnlyWhiteSpace(username)) {
+      setShowErrorMessage(true);
+    } else {
+      setShowErrorMessage(false);
+      setShowGreeting(true);
+      submitHandler();
+    }
   }
 
-  //ToDo if no name, show message, don't show settings
+  function isOnlyWhiteSpace(text) {
+    return text.replace(/\s/g, "").length === 0;
+  }
+
   //on enter, submit
   return showGreeting ? (
     <div>Hello, there, {username}!</div>
@@ -25,6 +35,7 @@ export default function Greeting({ submitHandler }) {
       <button type="submit" onClick={submitNameHandler}>
         Submit
       </button>
+      {showErrorMessage ? <div>Please fill in your name.</div> : null}
     </div>
   );
 }
