@@ -30,11 +30,18 @@ export default function Greeting({ submitHandler }) {
         id="username"
         maxLength="20"
         onChange={event => setUsername(event.target.value)}
+        onKeyPress={event => {
+          if (event.key === "Enter") {
+            setUsername(event.target.value);
+            submitNameHandler();
+          }
+        }}
       />
 
       <button type="submit" onClick={submitNameHandler}>
         Submit
       </button>
+
       {showErrorMessage ? <div>Please fill in your name.</div> : null}
     </div>
   );
