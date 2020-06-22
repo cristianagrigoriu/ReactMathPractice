@@ -42,7 +42,9 @@ export default function Greeting({ submitHandler }) {
         Submit
       </button>
 
-      {showErrorMessage ? <div>Please fill in your name.</div> : null}
+      {showErrorMessage ? (
+        <div className="errorMessage">Please fill in your name.</div>
+      ) : null}
     </div>
   );
 }

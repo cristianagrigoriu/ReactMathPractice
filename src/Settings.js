@@ -8,6 +8,12 @@ export default function Settings({ onSettingsSelected }) {
   const [operationsType, setOperationsType] = useState([]);
   const [displayAllAtOnce, setDisplayAllAtOnce] = useState(false);
 
+  function areSettingsValid() {
+    console.log("aaa");
+    console.log(`#op: ${numberOfOperations}`);
+    return numberOfOperations !== 0;
+  }
+
   function handleSettingsSelected() {
     const settings = { numberOfOperations, operationsType, displayAllAtOnce };
     onSettingsSelected(settings);
@@ -19,7 +25,11 @@ export default function Settings({ onSettingsSelected }) {
       <NumberOfOperationsPicker onChange={setNumberOfOperations} />
       <OperationsTypePicker />
       <OperationDisplayTypePicker />
-      <button type="submit" onClick={handleSettingsSelected}>
+      <button
+        type="submit"
+        disabled={!areSettingsValid()}
+        onClick={handleSettingsSelected}
+      >
         Start
       </button>
     </div>

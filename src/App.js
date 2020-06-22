@@ -13,9 +13,10 @@ export default function App() {
   }
 
   function startQuiz(settings) {
-    setShowQuiz(true);
     setShowSettings(false);
-    console.log(settings);
+    setShowQuiz(true);
+    const { numberOfOperations, operationsType, displayAllAtOnce } = settings;
+    console.log(numberOfOperations);
   }
 
   return (
