@@ -18,6 +18,7 @@ export default function App() {
     const { numberOfOperations, operationsType, displayAllAtOnce } = settings;
     console.log(numberOfOperations);
     console.log(operationsType);
+    console.log(displayAllAtOnce);
   }
 
   return (
