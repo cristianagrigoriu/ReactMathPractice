@@ -17,6 +17,7 @@ export default function App() {
     setShowQuiz(true);
     const { numberOfOperations, operationsType, displayAllAtOnce } = settings;
     console.log(numberOfOperations);
+    console.log(operationsType);
   }
 
   return (

@@ -9,9 +9,7 @@ export default function Settings({ onSettingsSelected }) {
   const [displayAllAtOnce, setDisplayAllAtOnce] = useState(false);
 
   function areSettingsValid() {
-    console.log("aaa");
-    console.log(`#op: ${numberOfOperations}`);
-    return numberOfOperations !== 0;
+    return numberOfOperations !== 0 && operationsType.length != 0;
   }
 
   function handleSettingsSelected() {
@@ -23,7 +21,7 @@ export default function Settings({ onSettingsSelected }) {
     <div>
       <h2>Settings</h2>
       <NumberOfOperationsPicker onChange={setNumberOfOperations} />
-      <OperationsTypePicker />
+      <OperationsTypePicker onChange={setOperationsType} />
       <OperationDisplayTypePicker />
       <button
         type="submit"
