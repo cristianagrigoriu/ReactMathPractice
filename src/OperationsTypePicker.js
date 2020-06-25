@@ -1,12 +1,7 @@
 import React from "react";
 
 export default function OperationsTypePicker({ onChange }) {
-  let typeOfOperations = [
-    "addition",
-    "subtraction",
-    "multiplication",
-    "division"
-  ];
+  let typeOfOperations = ["+", "-", "*", "/"];
 
   function onOperationChosen(options) {
     onChange([...options].filter(x => x.selected).map(x => x.value));
