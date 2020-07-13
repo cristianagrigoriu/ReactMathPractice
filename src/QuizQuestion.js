@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
+import math from "mathjs";
 
 export default function QuizQuestion({ operations }) {
   const [userResult, setUserResult] = useState(0);
   const [firstNumber, setFirstNumber] = useState(getRandomNumber());
+  const [secondNumber, setSecondNumber] = useState(getRandomNumber());
+  const [sign, setSign] = useState(getRandomOperation());
 
   //useEffect
   //const firstNumber = useEffect()
 
-  //const firstNumber = getRandomNumber();
-  const secondNumber = getRandomNumber();
+  useEffect(() => {
+    setFirstNumber(getRandomNumber());
+    setSecondNumber(getRandomNumber());
+    setSign(getRandomOperation());
+  }, []);
 
-  const sign = getRandomOperation();
+  //const firstNumber = getRandomNumber();
+  //const secondNumber = getRandomNumber();
+
   const equalSign = "=";
 
   function getRandomOperation() {
@@ -23,11 +31,11 @@ export default function QuizQuestion({ operations }) {
   }
 
   function handleUserResult(value) {
-    setUserResult(value);
+    setUserResult(Number(value));
   }
 
   function checkUserResult() {
-    const realResult = eval(`${firstNumber} ${sign} ${secondNumber}`);
+    const realResult = math.eval(`${firstNumber} ${sign} ${secondNumber}`); //);
     console.log(realResult === userResult);
     return realResult === userResult;
   }
