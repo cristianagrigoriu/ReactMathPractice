@@ -3,6 +3,7 @@ import "./styles.css";
 import Greeting from "./Greeting";
 import Settings from "./Settings";
 import Quiz from "./Quiz";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
   const [showSettings, setShowSettings] = useState(false);

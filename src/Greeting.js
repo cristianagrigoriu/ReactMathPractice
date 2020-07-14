@@ -20,7 +20,6 @@ export default function Greeting({ submitHandler }) {
     return text.replace(/\s/g, "").length === 0;
   }
 
-  //on enter, submit
   return showGreeting ? (
     <div>Hello, there, {username}!</div>
   ) : (
@@ -38,7 +37,11 @@ export default function Greeting({ submitHandler }) {
         }}
       />
 
-      <button type="submit" onClick={submitNameHandler}>
+      <button
+        className="btn btn-dark"
+        type="submit"
+        onClick={submitNameHandler}
+      >
         Submit
       </button>
 

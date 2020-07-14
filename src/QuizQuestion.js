@@ -36,12 +36,18 @@ export default function QuizQuestion({ operations }) {
 
   return (
     <div>
-      <span>{firstNumber}</span>
-      <span>{sign}</span>
-      <span>{secondNumber}</span>
-      <span>{equalSign}</span>
-      <input onChange={event => handleUserResult(event.target.value)} />
-      <button onClick={checkUserResult}>Check</button>
+      <span>
+        <strong>
+          {firstNumber} {sign} {secondNumber} {equalSign}
+        </strong>
+      </span>
+      <input
+        className="form-group"
+        onChange={event => handleUserResult(event.target.value)}
+      />
+      <button className="btn btn-dark" onClick={checkUserResult}>
+        Check
+      </button>
     </div>
   );
 }

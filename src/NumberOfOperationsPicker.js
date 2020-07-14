@@ -7,7 +7,11 @@ export default function NumberOfOperationsPicker({ onChange }) {
     <div>
       <label>
         Pick the number of operations:
-        <select required onChange={event => onChange(event.target.value)}>
+        <select
+          className="dropdown"
+          required
+          onChange={event => onChange(event.target.value)}
+        >
           {numberOfOperations.map((x, y) => (
             <option key={y}>{x}</option>
           ))}

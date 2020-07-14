@@ -24,6 +24,7 @@ export default function Settings({ onSettingsSelected }) {
       <OperationsTypePicker onChange={setOperationsType} />
       <OperationDisplayTypePicker onChange={setDisplayAllAtOnce} />
       <button
+        className="btn btn-dark"
         type="submit"
         disabled={!areSettingsValid()}
         onClick={handleSettingsSelected}
