@@ -1,11 +1,14 @@
 import React from "react";
 import QuizQuestion from "./QuizQuestion";
 
-export default function Quiz() {
+export default function Quiz(settings, colours) {
   function createQuestions() {
     const questions = [];
-    for (let i = 0; i < 3; i++) {
-      questions.push(<QuizQuestion key={i} operations={("+", "-")} />);
+
+    for (let i = 0; i < Number(settings.numberOfOperations); i++) {
+      questions.push(
+        <QuizQuestion key={i} operations={settings.operationsType} />
+      );
     }
     return questions;
   }

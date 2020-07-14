@@ -7,17 +7,11 @@ export default function QuizQuestion({ operations }) {
   const [secondNumber, setSecondNumber] = useState(getRandomNumber());
   const [sign, setSign] = useState(getRandomOperation());
 
-  //useEffect
-  //const firstNumber = useEffect()
-
   useEffect(() => {
     setFirstNumber(getRandomNumber());
     setSecondNumber(getRandomNumber());
     setSign(getRandomOperation());
   }, []);
-
-  //const firstNumber = getRandomNumber();
-  //const secondNumber = getRandomNumber();
 
   const equalSign = "=";
 
