@@ -21,7 +21,7 @@ export default function Greeting({ submitHandler }) {
   }
 
   return showGreeting ? (
-    <div>Hello, there, {username}!</div>
+    <div className="text-info">Hello, there, {username}!</div>
   ) : (
     <div>
       <label htmlFor="username">Name</label>

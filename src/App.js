@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Welcome to Math Practice</h1>
+      <h1 className="text-info">Welcome to Math Practice</h1>
       <Greeting submitHandler={handleShowSettings} />
       {showSettings ? <Settings onSettingsSelected={startQuiz} /> : null}
       {showQuiz ? <Quiz {...settings} /> : null}
