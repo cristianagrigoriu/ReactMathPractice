@@ -6,6 +6,9 @@ export default function QuizQuestion({ operations }) {
   const [firstNumber, setFirstNumber] = useState(getRandomNumber());
   const [secondNumber, setSecondNumber] = useState(getRandomNumber());
   const [sign, setSign] = useState(getRandomOperation());
+  const [isUserResultCorrect, setIsUserResultCorrect] = useState(false);
+  const [isCheckEnabled, setIsCheckEnabled] = useState(true);
+  const [userHasSubmittedAnswer, setUserHasSubmittedAnswer] = useState(false);
 
   useEffect(() => {
     setFirstNumber(getRandomNumber());
@@ -29,9 +32,13 @@ export default function QuizQuestion({ operations }) {
   }
 
   function checkUserResult() {
+    setUserHasSubmittedAnswer(true);
+
     const realResult = math.eval(`${firstNumber} ${sign} ${secondNumber}`); //);
-    console.log(realResult === userResult);
-    return realResult === userResult;
+
+    const isResultCorrect = realResult === userResult;
+    setIsUserResultCorrect(isResultCorrect);
+    setIsCheckEnabled(!isResultCorrect);
   }
 
   return (
@@ -42,10 +49,20 @@ export default function QuizQuestion({ operations }) {
         </strong>
       </span>
       <input
-        className="form-group"
+        className={
+          isUserResultCorrect
+            ? "bg-success"
+            : userHasSubmittedAnswer
+            ? "bg-danger"
+            : "bg-light"
+        }
         onChange={event => handleUserResult(event.target.value)}
       />
-      <button className="btn btn-dark" onClick={checkUserResult}>
+      <button
+        className="btn btn-dark"
+        disabled={!isCheckEnabled}
+        onClick={checkUserResult}
+      >
         Check
       </button>
     </div>
