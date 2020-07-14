@@ -9,5 +9,5 @@ The aim of this application is to practice basic math operations. The user enter
 
 They then receive the list of operations for practice, they can submit their answer and check it.
 
-##### Early design of Quiz Component
+<code>Early design of Quiz Component</code>
 ![Early design of Quiz Component](/react_math_practice.png)
