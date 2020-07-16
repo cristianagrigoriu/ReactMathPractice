@@ -1,40 +1,25 @@
 import React, { useState } from "react";
 import math from "mathjs";
+import useOperation from "./useOperation";
 
 export default function QuizQuestion({ operations }) {
   const [userResult, setUserResult] = useState(0);
-  const [operationDetails] = useState({
-    firstNumber: getRandomNumber(),
-    sign: getRandomSign(),
-    secondNumber: getRandomNumber()
-  });
   const [isUserResultCorrect, setIsUserResultCorrect] = useState(false);
   const [isCheckEnabled, setIsCheckEnabled] = useState(true);
   const [userHasSubmittedAnswer, setUserHasSubmittedAnswer] = useState(false);
 
+  const operationExpression = useOperation(operations);
+
   const equalSign = "=";
-
-  function getRandomSign() {
-    let randomIndex = Math.floor(Math.random() * operations.length);
-    return operations[randomIndex];
-  }
-
-  function getRandomNumber() {
-    return Math.floor(Math.random() * 10);
-  }
 
   function handleUserResult(value) {
     setUserResult(Number(value));
   }
 
-  function checkUserResult() {
-    setUserHasSubmittedAnswer(true);
+  function checkUserResult(value) {
+    setUserHasSubmittedAnswer(Number(true));
 
-    const realResult = math.eval(
-      `${operationDetails.firstNumber} ${operationDetails.sign} ${
-        operationDetails.secondNumber
-      }`
-    );
+    const realResult = math.eval(operationExpression);
 
     const isResultCorrect = realResult === userResult;
     setIsUserResultCorrect(isResultCorrect);
@@ -45,10 +30,7 @@ export default function QuizQuestion({ operations }) {
     <div>
       <span>
         <strong>
-          {operationDetails.firstNumber}
-          {operationDetails.sign}
-          {operationDetails.secondNumber}
-          {equalSign}
+          {operationExpression} {equalSign}
         </strong>
       </span>
       <input

@@ -1,7 +1,7 @@
 import React from "react";
 import QuizQuestion from "./QuizQuestion";
 
-export default function Quiz(settings, colours) {
+export default function Quiz(settings) {
   function createQuestions() {
     const questions = [];
 
