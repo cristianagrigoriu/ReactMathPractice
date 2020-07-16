@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import math from "mathjs";
 
 export default function QuizQuestion({ operations }) {
   const [userResult, setUserResult] = useState(0);
-  const [firstNumber, setFirstNumber] = useState(getRandomNumber());
-  const [secondNumber, setSecondNumber] = useState(getRandomNumber());
-  const [sign, setSign] = useState(getRandomOperation());
+  const [operationDetails] = useState({
+    firstNumber: getRandomNumber(),
+    sign: getRandomSign(),
+    secondNumber: getRandomNumber()
+  });
   const [isUserResultCorrect, setIsUserResultCorrect] = useState(false);
   const [isCheckEnabled, setIsCheckEnabled] = useState(true);
   const [userHasSubmittedAnswer, setUserHasSubmittedAnswer] = useState(false);
 
-  useEffect(() => {
-    setFirstNumber(getRandomNumber());
-    setSecondNumber(getRandomNumber());
-    setSign(getRandomOperation());
-  }, []);
-
   const equalSign = "=";
 
-  function getRandomOperation() {
+  function getRandomSign() {
     let randomIndex = Math.floor(Math.random() * operations.length);
     return operations[randomIndex];
   }
@@ -34,7 +30,11 @@ export default function QuizQuestion({ operations }) {
   function checkUserResult() {
     setUserHasSubmittedAnswer(true);
 
-    const realResult = math.eval(`${firstNumber} ${sign} ${secondNumber}`); //);
+    const realResult = math.eval(
+      `${operationDetails.firstNumber} ${operationDetails.sign} ${
+        operationDetails.secondNumber
+      }`
+    );
 
     const isResultCorrect = realResult === userResult;
     setIsUserResultCorrect(isResultCorrect);
@@ -45,7 +45,10 @@ export default function QuizQuestion({ operations }) {
     <div>
       <span>
         <strong>
-          {firstNumber} {sign} {secondNumber} {equalSign}
+          {operationDetails.firstNumber}
+          {operationDetails.sign}
+          {operationDetails.secondNumber}
+          {equalSign}
         </strong>
       </span>
       <input
