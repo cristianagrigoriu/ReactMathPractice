@@ -34,6 +34,7 @@ export default function QuizQuestion({ operations }) {
         </strong>
       </span>
       <input
+        type="number"
         className={
           isUserResultCorrect
             ? "bg-success"
