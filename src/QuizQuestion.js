@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import math from "mathjs";
 import useOperation from "./useOperation";
 
-export default function QuizQuestion({ operations }) {
+export default function QuizQuestion(
+  { operations },
+  { isUserResultCorrectForQuestion }
+) {
   const [userResult, setUserResult] = useState("");
   const [isUserResultCorrect, setIsUserResultCorrect] = useState(false);
-  const [isCheckEnabled, setIsCheckEnabled] = useState(true);
+
   const [userHasSubmittedAnswer, setUserHasSubmittedAnswer] = useState(false);
 
   const operationExpression = useOperation(operations);
@@ -17,30 +20,13 @@ export default function QuizQuestion({ operations }) {
     setUserHasSubmittedAnswer(Number(true));
   }
 
-  function checkUserResult(value) {
-    setUserResult(Number(value), () => {
-      setUserHasSubmittedAnswer(Number(true));
-
-      const realResult = math.eval(operationExpression);
-
-      const isResultCorrect = realResult === userResult;
-
-      console.log(userResult);
-      console.log(realResult);
-
-      setIsUserResultCorrect(isResultCorrect);
-      setIsCheckEnabled(!isResultCorrect);
-    });
-  }
-
   //use check user result
   useEffect(() => {
     const realResult = math.eval(operationExpression);
     const isResultCorrect = realResult === userResult;
 
     setIsUserResultCorrect(isResultCorrect);
-    setIsCheckEnabled(!isResultCorrect);
-  }, [userResult, operationExpression]);
+  }, [userResult, operationExpression, isUserResultCorrectForQuestion]);
 
   return (
     <div>
@@ -61,13 +47,6 @@ export default function QuizQuestion({ operations }) {
         value={userResult}
         onChange={event => handleUserResult(event.target.value)}
       />
-      <button
-        className="btn btn-dark"
-        disabled={!isCheckEnabled}
-        onClick={checkUserResult}
-      >
-        Check
-      </button>
     </div>
   );
 }
