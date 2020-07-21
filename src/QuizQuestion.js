@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import math from "mathjs";
 import useOperation from "./useOperation";
 
-export default function QuizQuestion(
-  { operations },
-  { isUserResultCorrectForQuestion }
-) {
+export default function QuizQuestion({
+  id,
+  operations,
+  onQuizQuestionAnswered
+}) {
   const [userResult, setUserResult] = useState("");
   const [isUserResultCorrect, setIsUserResultCorrect] = useState(false);
 
@@ -26,7 +27,8 @@ export default function QuizQuestion(
     const isResultCorrect = realResult === userResult;
 
     setIsUserResultCorrect(isResultCorrect);
-  }, [userResult, operationExpression, isUserResultCorrectForQuestion]);
+    onQuizQuestionAnswered(id, isResultCorrect);
+  }, [userResult, operationExpression, id]);
 
   return (
     <div>

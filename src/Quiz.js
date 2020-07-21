@@ -2,24 +2,16 @@ import React, { useState, useEffect, useCallback } from "react";
 import QuizQuestion from "./QuizQuestion";
 
 export default function Quiz(settings) {
-  const [isFinishEnabled, setIsFinishEnabled] = useState(false);
   const [areAllAnswersCorrect, setAreAllAnswersCorrect] = useState(false);
+  const [questionAnswers, setQuestionAnswers] = useState([]);
 
   const questions = [];
 
-  // const isUserResultCorrectForQuestion = useCallback(
-  //   isCorrect => {
-  //     setAreAllAnswersCorrect(areAllAnswersCorrect && isCorrect);
-  //   },
-  //   [areAllAnswersCorrect]
-  // );
-
-  function checkAnswer(isCorrect) {
-    setAreAllAnswersCorrect(areAllAnswersCorrect && userResult);
-    console.log(isCorrect);
-    console.log(`from function ${areAllAnswersCorrect} && ${isCorrect}`);
-    console.log(`from function ${areAllAnswersCorrect && isCorrect}`);
-    console.log(`from function ${areAllAnswersCorrect}`);
+  function checkAnswer(key, isCorrect) {
+    const answers = [...questionAnswers];
+    answers[key] = isCorrect;
+    setQuestionAnswers(answers);
+    //call method to check if all are correct
   }
 
   function createQuestions() {
@@ -28,24 +20,24 @@ export default function Quiz(settings) {
         <QuizQuestion
           key={i}
           operations={settings.operationsType}
-          isUserResultCorrectForQuestion={checkAnswer}
+          onQuizQuestionAnswered={checkAnswer}
         />
       );
     }
     return questions;
   }
 
-  useEffect(() => {
-    setAreAllAnswersCorrect(true);
-    questions.map(checkAnswer); //flatten array
-    setIsFinishEnabled(areAllAnswersCorrect);
-    console.log(`from useEffect ${areAllAnswersCorrect}`);
-  }, [setAreAllAnswersCorrect, questions, checkAnswer, areAllAnswersCorrect]);
-
   return (
     <div>
       {createQuestions()}
-      <button className="btn btn-dark" disabled={!isFinishEnabled}>
+      {/* {[...Array(settings.numberOfOperations)].map((x, i) => (
+        <QuizQuestion
+          key={i}
+          operations={settings.operationsType}
+          onQuizQuestionAnswered={checkAnswer}
+        />
+      ))} */}
+      <button className="btn btn-dark" disabled={!areAllAnswersCorrect}>
         Finish
       </button>
     </div>
