@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import QuizQuestion from "./QuizQuestion";
 
 export default function Quiz(settings) {
@@ -7,11 +7,25 @@ export default function Quiz(settings) {
 
   const questions = [];
 
+  // useState(() => {
+  //   let answers = [...questionAnswers];
+  //   answers = [...Array(settings.numberOfOperations)];
+  //   answers.fill(false);
+  //   setQuestionAnswers(answers);
+  //   console.log(
+  //     `no=${setAreAllAnswersCorrect.numberOfOperations} array=${questionAnswers}`
+  //   );
+  // }, [settings.numberOfOperations]);
+
   function checkAnswer(key, isCorrect) {
-    const answers = [...questionAnswers];
+    const answers = questionAnswers;
     answers[key] = isCorrect;
     setQuestionAnswers(answers);
-    //call method to check if all are correct
+    setAreAllAnswersCorrect(checkIfAllAnswersAreCorrect(questionAnswers));
+  }
+
+  function checkIfAllAnswersAreCorrect(answers) {
+    return answers.every(x => x === true);
   }
 
   function createQuestions() {
@@ -19,6 +33,7 @@ export default function Quiz(settings) {
       questions.push(
         <QuizQuestion
           key={i}
+          id={i}
           operations={settings.operationsType}
           onQuizQuestionAnswered={checkAnswer}
         />
