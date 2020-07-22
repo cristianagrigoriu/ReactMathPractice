@@ -1,21 +1,12 @@
 import React, { useState } from "react";
 import QuizQuestion from "./QuizQuestion";
+import Timer from "./Timer.js";
 
 export default function Quiz(settings) {
   const [areAllAnswersCorrect, setAreAllAnswersCorrect] = useState(false);
   const [questionAnswers, setQuestionAnswers] = useState([]);
 
   const questions = [];
-
-  // useState(() => {
-  //   let answers = [...questionAnswers];
-  //   answers = [...Array(settings.numberOfOperations)];
-  //   answers.fill(false);
-  //   setQuestionAnswers(answers);
-  //   console.log(
-  //     `no=${setAreAllAnswersCorrect.numberOfOperations} array=${questionAnswers}`
-  //   );
-  // }, [settings.numberOfOperations]);
 
   function checkAnswer(key, isCorrect) {
     const answers = questionAnswers;
@@ -55,6 +46,7 @@ export default function Quiz(settings) {
       <button className="btn btn-dark" disabled={!areAllAnswersCorrect}>
         Finish
       </button>
+      <Timer />
     </div>
   );
 }
