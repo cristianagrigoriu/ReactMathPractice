@@ -46,7 +46,7 @@ export default function Quiz(settings) {
       <button className="btn btn-dark" disabled={!areAllAnswersCorrect}>
         Finish
       </button>
-      <Timer />
+      <Timer areAllAnswersCorrect={areAllAnswersCorrect} />
     </div>
   );
 }
