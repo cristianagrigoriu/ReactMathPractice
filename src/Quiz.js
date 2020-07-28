@@ -21,6 +21,7 @@ export default function Quiz(settings) {
 
   function createQuestions() {
     for (let i = 0; i < Number(settings.numberOfOperations); i++) {
+      //for prin intrebari gata generate
       questions.push(
         <QuizQuestion
           key={i}

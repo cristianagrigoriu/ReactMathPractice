@@ -15,5 +15,6 @@ function useOperation(operations) {
   }
   return `${firstNumber} ${sign} ${secondNumber}`;
 }
+//generate x random question details
 
 export default useOperation;
