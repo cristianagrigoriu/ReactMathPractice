@@ -20,7 +20,7 @@ export default function Quiz(settings) {
     return answers.every(x => x === true);
   }
 
-  function createQuestions() {
+  function createQuizQuestions() {
     return questions.map((x, i) => (
       <QuizQuestion
         key={i}
@@ -33,14 +33,7 @@ export default function Quiz(settings) {
 
   return (
     <div>
-      {createQuestions()}
-      {/*[...Array(settings.numberOfOperations)].map((x, i) => (
-      //   <QuizQuestion
-      //     key={i}
-      //     operations={settings.operationsType}
-      //     onQuizQuestionAnswered={checkAnswer}
-      //   />
-      // ))} */}
+      {createQuizQuestions()}
       <button className="btn btn-dark" disabled={!areAllAnswersCorrect}>
         Finish
       </button>
