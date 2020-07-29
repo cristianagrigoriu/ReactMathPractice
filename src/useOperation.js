@@ -1,20 +1,36 @@
 import { useState } from "react";
+import QuestionDetails from "./QuestionDetails";
 
-function useOperation(operations) {
-  const [firstNumber] = useState(getRandomNumber());
-  const [secondNumber] = useState(getRandomNumber());
-  const [sign] = useState(getRandomSign());
+function useOperation(settings) {
+  const [questions] = useState(createQuestions());
+
+  function createQuestions() {
+    let createdQuestions = [];
+    for (let i = 0; i < settings.numberOfOperations; i++) {
+      let firstNumber = getRandomNumber();
+      let sign = getRandomSign();
+      let secondNumber = getRandomNumber();
+
+      let expression = `${firstNumber} ${sign} ${secondNumber}`;
+      let newQuestion = new QuestionDetails(expression);
+
+      createdQuestions.push(newQuestion);
+    }
+    return createdQuestions;
+  }
 
   function getRandomNumber() {
     return Math.floor(Math.random() * 10);
   }
 
   function getRandomSign() {
-    let randomIndex = Math.floor(Math.random() * operations.length);
-    return operations[randomIndex];
+    let randomIndex = Math.floor(
+      Math.random() * settings.operationsType.length
+    );
+    return settings.operationsType[randomIndex];
   }
-  return `${firstNumber} ${sign} ${secondNumber}`;
+
+  return questions;
 }
-//generate x random question details
 
 export default useOperation;

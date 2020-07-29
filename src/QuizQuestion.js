@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
-import math from "mathjs";
-import useOperation from "./useOperation";
 
 export default function QuizQuestion({
   id,
-  operations,
+  questionDetails,
   onQuizQuestionAnswered
 }) {
   const [userResult, setUserResult] = useState("");
   const [isUserResultCorrect, setIsUserResultCorrect] = useState(false);
 
   const [userHasSubmittedAnswer, setUserHasSubmittedAnswer] = useState(false);
-
-  const operationExpression = useOperation(operations);
 
   const equalSign = "=";
 
@@ -23,18 +19,17 @@ export default function QuizQuestion({
 
   //use check user result
   useEffect(() => {
-    const realResult = math.eval(operationExpression);
-    const isResultCorrect = realResult === userResult;
+    const isResultCorrect = questionDetails.correctResult === userResult;
 
     setIsUserResultCorrect(isResultCorrect);
     onQuizQuestionAnswered(id, isResultCorrect);
-  }, [userResult, operationExpression, id]);
+  }, [userResult, id]);
 
   return (
     <div>
       <span>
         <strong>
-          {operationExpression} {equalSign}
+          {questionDetails.operationExpression} {equalSign}
         </strong>
       </span>
       <input
