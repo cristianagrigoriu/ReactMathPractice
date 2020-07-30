@@ -6,11 +6,15 @@ import useOperation from "./useOperation";
 export default function Quiz(settings) {
   const [areAllAnswersCorrect, setAreAllAnswersCorrect] = useState(false);
   const [questionAnswers, setQuestionAnswers] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1);
 
   const questions = useOperation(settings);
 
   function checkAnswer(key, isCorrect) {
+    if (isCorrect && settings.displayAllAtOnce === false) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+
     const answers = questionAnswers;
     answers[key] = isCorrect;
     setQuestionAnswers(answers);
@@ -21,21 +25,17 @@ export default function Quiz(settings) {
     return answers.every(x => x === true);
   }
 
-  function createQuizQuestions() {
-    return questions.map((x, i) => (
-      <QuizQuestion
-        key={i}
-        id={i}
-        questionDetails={x}
-        onQuizQuestionAnswered={checkAnswer}
-      />
-    ));
-  }
-
-  function checkAnswerForSingleQuestion(key, isCorrect) {
-    if (isCorrect) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
+  function getQuizQuestionsUntil(numberOfDisplayedQuestions) {
+    return questions
+      .slice(0, numberOfDisplayedQuestions)
+      .map((x, i) => (
+        <QuizQuestion
+          key={i}
+          id={i}
+          questionDetails={x}
+          onQuizQuestionAnswered={checkAnswer}
+        />
+      ));
   }
 
   useEffect(() => {
@@ -44,26 +44,11 @@ export default function Quiz(settings) {
     }
   }, [currentQuestionIndex]);
 
-  function getCurrentQuestion() {
-    if (currentQuestionIndex === settings.numberOfOperations) {
-      return <div>All done!</div>;
-    }
-
-    return (
-      <QuizQuestion
-        key={currentQuestionIndex}
-        id={currentQuestionIndex}
-        questionDetails={questions[currentQuestionIndex]}
-        onQuizQuestionAnswered={checkAnswerForSingleQuestion}
-      />
-    );
-  }
-
   return (
     <div>
       {settings.displayAllAtOnce === true
-        ? createQuizQuestions()
-        : getCurrentQuestion()}
+        ? getQuizQuestionsUntil(settings.numberOfOperations)
+        : getQuizQuestionsUntil(currentQuestionIndex)}
       <button className="btn btn-dark" disabled={!areAllAnswersCorrect}>
         Finish
       </button>
