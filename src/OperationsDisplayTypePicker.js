@@ -4,7 +4,7 @@ export default function OperationDisplayType({ onChange }) {
   return (
     <div>
       <label>
-        Print one operation at a time:
+        Display all questions at once:
         <input
           type="checkbox"
           onChange={event => onChange(event.target.checked)}

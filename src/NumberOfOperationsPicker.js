@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function NumberOfOperationsPicker({ onChange }) {
-  let numberOfOperations = ["", 5, 10, 15];
+  let numberOfOperations = ["", 2, 5, 10, 15];
 
   return (
     <div>

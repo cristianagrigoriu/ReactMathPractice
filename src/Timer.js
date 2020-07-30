@@ -30,7 +30,6 @@ export default function Timer({ areAllAnswersCorrect }) {
   // => displays numbers din 1 in 1
   // => when updating state, create new pbject with new state, don't update the existing object
   useEffect(() => {
-    console.log(areAllAnswersCorrect);
     if (areAllAnswersCorrect === true) {
       console.log("DA");
       return;

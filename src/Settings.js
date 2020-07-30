@@ -13,7 +13,11 @@ export default function Settings({ onSettingsSelected }) {
   }
 
   function handleSettingsSelected() {
-    const settings = { numberOfOperations, operationsType, displayAllAtOnce };
+    const settings = {
+      numberOfOperations: Number(numberOfOperations),
+      operationsType,
+      displayAllAtOnce
+    };
     onSettingsSelected(settings);
   }
 
